@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ndbx formatVersion="20" type="file" uuid="ed74511a-d746-48e4-963a-77f46ee7429d">
+    <property name="canvasHeight" value="1000"/>
+    <property name="canvasWidth" value="1000"/>
+    <property name="canvasX" value="0"/>
+    <property name="canvasY" value="0"/>
+    <node name="root" prototype="core.network" renderedChild="combine1">
+        <node name="colorize1" position="11.00,9.00" prototype="corevector.colorize">
+            <port name="stroke" type="color" value="#82004fff"/>
+            <port name="strokeWidth" type="float" value="4.0"/>
+        </node>
+        <node name="colorize2" position="14.00,9.00" prototype="corevector.colorize">
+            <port name="stroke" type="color" value="#0000b3ff"/>
+            <port name="strokeWidth" type="float" value="1.0"/>
+        </node>
+        <node name="colorize3" position="17.00,9.00" prototype="corevector.colorize"/>
+        <node name="combine1" position="14.00,12.00" prototype="list.combine"/>
+        <node name="ellipse1" position="17.00,7.00" prototype="corevector.ellipse"/>
+        <node name="import_csv1" position="11.00,3.00" prototype="data.import_csv">
+            <port name="file" type="string" value="media design/film.csv"/>
+        </node>
+        <node name="line1" position="11.00,7.00" prototype="corevector.line">
+            <port name="point1" type="point" value="89.00,0.00"/>
+            <port name="point2" type="point" value="-208.00,0.00"/>
+            <port name="points" type="int" value="9"/>
+        </node>
+        <node name="line2" position="14.00,7.00" prototype="corevector.line">
+            <port name="point2" type="point" value="-71.00,123.00"/>
+            <port name="points" type="int" value="8"/>
+        </node>
+        <node name="lookup1" position="11.00,5.00" prototype="data.lookup">
+            <port name="key" type="string" value="Years"/>
+        </node>
+        <node name="lookup2" position="14.00,5.00" prototype="data.lookup">
+            <port name="key" type="string" value="Length"/>
+        </node>
+        <node name="lookup3" position="17.00,5.00" prototype="data.lookup">
+            <port name="key" type="string" value="Popularity"/>
+        </node>
+        <node name="translate1" position="11.00,10.00" prototype="corevector.translate">
+            <port name="translate" type="point" value="-7.00,0.00"/>
+        </node>
+        <node name="translate2" position="14.00,10.00" prototype="corevector.translate">
+            <port name="translate" type="point" value="105.00,13.00"/>
+        </node>
+        <node name="translate3" position="17.00,10.00" prototype="corevector.translate"/>
+        <conn input="lookup3.list" output="import_csv1"/>
+        <conn input="line2.point1" output="lookup2"/>
+        <conn input="lookup1.list" output="import_csv1"/>
+        <conn input="lookup2.list" output="import_csv1"/>
+        <conn input="line1.point1" output="lookup1"/>
+        <conn input="colorize1.shape" output="line1"/>
+        <conn input="ellipse1.position" output="lookup3"/>
+        <conn input="translate1.shape" output="colorize1"/>
+        <conn input="combine1.list1" output="translate1"/>
+        <conn input="colorize2.shape" output="line2"/>
+        <conn input="translate2.shape" output="colorize2"/>
+        <conn input="combine1.list2" output="translate2"/>
+        <conn input="colorize3.shape" output="ellipse1"/>
+        <conn input="translate3.shape" output="colorize3"/>
+    </node>
+</ndbx>
